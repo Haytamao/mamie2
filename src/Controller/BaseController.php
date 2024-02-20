@@ -38,6 +38,7 @@ class BaseController extends AbstractController
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
+                $cafe->setDateAjout(new \Datetime());
                 $em->persist($cafe);
                 $em->flush();
                 $this->addFlash('notice','Message envoyé');

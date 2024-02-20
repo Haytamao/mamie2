@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CafeRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CafeRepository::class)]
@@ -18,6 +19,9 @@ class Cafe
 
     #[ORM\Column(length: 30)]
     private ?string $origine = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateAjout = null;
 
     public function getId(): ?int
     {
@@ -44,6 +48,18 @@ class Cafe
     public function setOrigine(string $origine): static
     {
         $this->origine = $origine;
+
+        return $this;
+    }
+
+    public function getDateAjout(): ?\DateTimeInterface
+    {
+        return $this->dateAjout;
+    }
+
+    public function setDateAjout(\DateTimeInterface $dateAjout): static
+    {
+        $this->dateAjout = $dateAjout;
 
         return $this;
     }
